@@ -25,28 +25,37 @@ const cards = [
 
 	];
 
+function createBoard() {
+	for (var i = 0; i < cards.length; i++) {
+		const cardElement = document.createElement('img');
+		cardElement.setAttribute('src','images/back.png');
+		cardElement.setAttribute('data-id',[i]);
+		cardElement.addEventListener('click',flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
 
-var cardsInPlay = [];
+	}
+}
+
+
+const cardsInPlay = [];
 
 function checkForMatch(){
 	
 	if (cardsInPlay[0] === cardsInPlay[1]) {
-  alert("You found a match!");
-} else {
-  alert("Sorry, try again.");
+  		alert("You found a match!");
+	} else {
+  		alert("Sorry, try again.");
+		}
 }
-}
 
 
-function flipCard(cardId){
+function flipCard() {
 
-	console.log("User flipped " + cards[cardId].rank);
+	const cardId = this.getAttribute('data-id');
 
 	cardsInPlay.push(cards[cardId].rank);
-
-	console.log(cards[cardId].cardImage);
-
-	console.log(cards[cardId].suit);
+ 	
+ 	this.setAttribute('src', cards[cardId].cardImage);
 
 	if (cardsInPlay.length === 2) {
 		checkForMatch();
@@ -54,12 +63,11 @@ function flipCard(cardId){
 	
 }
 
-flipCard(0);
-
-flipCard(2);
+createBoard();
 
 
+// It might be useful to add a "Reset" button to the HTML and set up an event in 
+// the JavaScript file so that the user can reset the game after playing.
 
-
-
+// For an extra challenge, consider how you could keep track of and display the user's score.
 
